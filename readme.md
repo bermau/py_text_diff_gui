@@ -5,6 +5,7 @@ Py_diff_GUI is a simple graphical application built using Python's Tkinter libra
 It allows users to compare two pieces of text side-by-side and highlights the differences, similar to a diff tool. This tool is useful for comparing documents, code snippets, or any other textual 
 content to see what has changed.
 
+
 ## Features
 
 - **Side-by-side text comparison:** Load and display two texts in separate text boxes.
