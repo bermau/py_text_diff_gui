@@ -11,6 +11,7 @@ def diff_texts():
 
     text_diff_box.delete("1.0", tk.END)
     for line in diff:
+        print(line)
         if line.startswith('-'):
             text_diff_box.insert(tk.END, line + '\n', 'removed')
         elif line.startswith('+'):
@@ -21,6 +22,8 @@ def diff_texts():
             text_diff_box.insert(tk.END, line + '\n')
 
 
+WIDTH_OF_WINDOW = 80
+
 root = tk.Tk()
 root.title("Text Diff Viewer")
 
@@ -28,11 +31,11 @@ frame = tk.Frame(root)
 frame.pack(padx=10, pady=10)
 
 # Text box for the first text
-text_box1 = tk.Text(frame, width=40, height=20)
+text_box1 = tk.Text(frame, width=WIDTH_OF_WINDOW, height=20)
 text_box1.grid(row=0, column=0, padx=(0, 10))
 
 # Text box for the second text
-text_box2 = tk.Text(frame, width=40, height=20)
+text_box2 = tk.Text(frame, width=WIDTH_OF_WINDOW, height=20)
 text_box2.grid(row=0, column=1, padx=(10, 0))
 
 # Button to compute the diff
@@ -40,7 +43,7 @@ diff_button = tk.Button(frame, text="Show Diff", command=diff_texts)
 diff_button.grid(row=1, column=0, columnspan=2, pady=10)
 
 # Text box to show the diff result
-text_diff_box = tk.Text(frame, width=80, height=20)
+text_diff_box = tk.Text(frame, width=2*WIDTH_OF_WINDOW+10, height=20)
 text_diff_box.grid(row=2, column=0, columnspan=2)
 
 # Highlighting for different changes
