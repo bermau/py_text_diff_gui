@@ -34,7 +34,8 @@ cd text-diff-viewer
 ## Usage
   1. Enter Texts: Start the application and enter your first text in the left text box and your second text in the right text box.
   1. Show Differences: Click the "Show Diff" button to highlight the differences between the two texts.
-  1. Review Differences: The differences will be displayed below, with removed lines in red, added lines in green, and changed lines in blue.
+  1. Review Differences: The differences will be displayed below, with removed lines in red, added lines in green, 
+  1. An HTML display is possible in the web-browser.
 
 ## Author :
 Bertrand Maubert, 

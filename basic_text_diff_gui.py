@@ -3,6 +3,14 @@ from difflib import Differ
 import difflib
 from tkhtmlview import HTMLLabel
 
+import webbrowser
+import os
+
+def display_html_in_browser(html_file):
+    file_path= os.path.abspath(html_file)
+    webbrowser.open(f"file://{file_path}")
+
+
 def diff_texts():
     text1 = text_box1.get("1.0", tk.END)
     text2 = text_box2.get("1.0", tk.END)
@@ -30,16 +38,19 @@ def diff_texts_as_html():
     # differ = Differ()
     # diff = list(differ.compare(text1.splitlines(), text2.splitlines()))
 
-    difference = difflib.HtmlDiff(tabsize=2)
+    difference = difflib.HtmlDiff(tabsize=2, wrapcolumn=80)
     diff_html = difference.make_file(fromlines=text1.splitlines(), tolines=text2.splitlines(),context=True, numlines=5, fromdesc="Original", todesc="Modified")
     print(diff_html)
     # export
     with open("compare.html", "w") as fp:
         fp.write(diff_html)
 
-    # Clear the HTMLLabel and insert new HTML
+    # # Clear the HTMLLabel and insert new HTML
     html_diff_label.set_html(diff_html)
     html_diff_label.update()
+
+    # iPython
+    display_html_in_browser("compare.html")
 
 
 
