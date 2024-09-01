@@ -2,6 +2,7 @@ import tkinter as tk
 from difflib import Differ
 import difflib
 from tkhtmlview import HTMLLabel
+from tkinterhtml import HtmlFrame
 
 import webbrowser
 import os
@@ -31,26 +32,27 @@ def diff_texts():
             text_diff_box.insert(tk.END, line + '\n')
 
 def diff_texts_as_html():
-    pass
+
     text1 = text_box1.get("1.0", tk.END)
     text2 = text_box2.get("1.0", tk.END)
-
+    TEMPO_FILE = "compare.html"
     # differ = Differ()
     # diff = list(differ.compare(text1.splitlines(), text2.splitlines()))
 
     difference = difflib.HtmlDiff(tabsize=2, wrapcolumn=80)
-    diff_html = difference.make_file(fromlines=text1.splitlines(), tolines=text2.splitlines(),context=True, numlines=5, fromdesc="Original", todesc="Modified")
-    print(diff_html)
-    # export
-    with open("compare.html", "w") as fp:
-        fp.write(diff_html)
+    diff_html_table = difference.make_table(fromlines=text1.splitlines(), tolines=text2.splitlines(),context=True, numlines=5, fromdesc="Original", todesc="Modified")
+    print(diff_html_table)
+
+    diff_html_file = difference.make_file(fromlines=text1.splitlines(), tolines=text2.splitlines(),context=True, numlines=5, fromdesc="Original", todesc="Modified")
+    with open(TEMPO_FILE, "w") as fp:
+        fp.write(diff_html_file)
 
     # # Clear the HTMLLabel and insert new HTML
-    html_diff_label.set_html(diff_html)
-    html_diff_label.update()
+    html_diff_label.set_content(diff_html_table)
+    # html_diff_label.update()
 
-    # iPython
-    display_html_in_browser("compare.html")
+    # Display HTML in a browser.
+    display_html_in_browser(TEMPO_FILE)
 
 
 
@@ -88,7 +90,7 @@ text_diff_box.tag_config('added', foreground='green')
 text_diff_box.tag_config('changed', foreground='blue')
 
 # HTML label to show the diff result (HTML)
-html_diff_label = HTMLLabel(frame, html="")
+html_diff_label = HtmlFrame(frame)
 html_diff_label.grid(row=3, column=0, columnspan=2)
 
 root.mainloop()
